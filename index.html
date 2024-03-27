@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>FM|Age calculator app</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2 class="topic">Age Calculator</h2>
+ <div class="content">
+    <form class="form-sbt" action="" novalidate  method="post">
+      <div class="forms-avail">
+          <div class="form-content">
+            <label class="labelD" for="day">DAY</label><br>
+            <input type="text" id="day" name="day" placeholder="DD" minlength="1" maxlength="2"  required/>
+            <p class="dError"></p>
+          </div>
+    
+          <div class="form-content">
+            <label class="labelM" for="month">MONTH</label><br>
+            <input type="text"  id="month" name="month" placeholder="MM" minlength="1" maxlength="2" required />
+            <p class="mError"></p>
+          </div>
+    
+          <div class="form-content">
+            <label class="labelY" for="year">YEAR</label><br>
+            <input type="text" id="year" name="year" placeholder="YY" pattern="\d*" maxlength="4" required/>
+            <p class="yError"></p>
+          </div>
+      </div>
+
+      <div class="arrow">
+        <hr>
+        <input type="submit" name="submit" id="submit-btn" value=""/> 
+      <hr class="none">
+      </div>
+    </form>
+  <div class="result">
+    <h1 class="year"> -- Years</h1>
+    <h1 class="month">-- Months</h1>
+    <h1 class="day"> -- Days</h1>
+  </div>
+ </div>
+
+</body>
+<script src="./index.js"></script>
+</html>
