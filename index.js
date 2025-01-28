@@ -10,30 +10,46 @@ let y= document.querySelector('.year')
 let m= document.querySelector('.month')
 let d= document.querySelector('.day')
 
-function age(){
+function age() {
     let y1 = document.querySelector('#year').value
     let m1 = document.querySelector('#month').value
     let d1 = document.querySelector('#day').value
-    
 
     let date = new Date()
     let y2 = date.getFullYear()
-    let m2 = 1 + date.getMonth()
-    let d2 = date.getDay()
+    let m2 = (1 + date.getMonth()).toString().padStart(2, '0'); // Format month as 2 digits
+    let d2 = date.getDate()
+
     let month = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31 , 30 ,31]
-    if(d1 > d2){
-        d2 = d2 + month[m2 - 1];
-        m2 = m2 - 1
-    };
-    if(m1 > m2){
-        m2 = m2 + 12;
-        y2 = y2 - 1
-    }
     
-    y.textContent =  y2 - y1 + ' Years';
-    m.textContent = m2 - m1 + ' months';
-    d.textContent = d2 - d1 + ' days';
+    let ageYears = y2 - y1; // Calculate initial year difference
+
+    if (m1 > m2 || (m1 === m2 && d1 > d2)) {
+        // If the current month is before the birth month or if it's the birth month but the birth day hasn't passed yet
+        ageYears--; // Decrease the year count
+    }
+
+    let ageMonths = m2 - m1;
+    if (ageMonths < 0) {
+        ageMonths += 12; // If the month difference is negative, adjust for previous year
+    }
+
+    let ageDays = d2 - d1;
+    if (ageDays < 0) {
+        // Adjust the day count if current day is less than birth day
+        ageDays += month[m2 - 1];
+        ageMonths--; // Decrease the month count if days were borrowed
+        if (ageMonths < 0) {
+            ageMonths += 12; // If month count is negative, adjust for the previous year
+            ageYears--; // Decrease year count if needed
+        }
+    }
+
+    y.textContent = ageYears + ' Years';
+    m.textContent = ageMonths + ' months';
+    d.textContent = ageDays + ' days';
 }
+
 
 function formValidation(){
     if(year.value === ''){
